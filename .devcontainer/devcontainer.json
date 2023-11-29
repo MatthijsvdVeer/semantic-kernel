@@ -1,0 +1,15 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:2": {}
+  },
+  "customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-dotnettools.dotnet-interactive-vscode",
+				"ms-semantic-kernel.semantic-kernel",
+				"esbenp.prettier-vscode"
+			]
+		}
+	}
+}
