@@ -8,7 +8,11 @@ public static class Configuration
 
     public static async Task<OpenAiSettings> GetSettings(OpenAiProvider openAiProvider)
     {
-        var settings = new OpenAiSettings();
+        var settings = new OpenAiSettings
+        {
+            OpenAiProvider = openAiProvider
+        };
+
         if (File.Exists(configFile))
         {
             System.Console.WriteLine($"Reading settings from {configFile}.");
@@ -26,7 +30,7 @@ public static class Configuration
             settings.Deployment = await InteractiveKernel.GetInputAsync("Model name.");
         }
 
-        if (string.IsNullOrEmpty(settings.Url))
+        if (string.IsNullOrEmpty(settings.Url) && openAiProvider == OpenAiProvider.Azure)
         {
             settings.Url = await InteractiveKernel.GetInputAsync("URL.");
         }
@@ -52,6 +56,8 @@ public sealed class OpenAiSettings
     public string Url { get; set; }
 
     public string Organisation { get; set; }
+
+    public OpenAiProvider OpenAiProvider { get; set; }
 }
 
 public enum OpenAiProvider
